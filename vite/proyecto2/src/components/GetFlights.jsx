@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { data } from "react-router-dom";
 
 export default function FlightSearch({destCode}) {
   const [flights, setFlights] = useState([]);
@@ -16,8 +17,8 @@ export default function FlightSearch({destCode}) {
         {
           params: {
             engine: "google_flights",
-            departure_id: "CUU",
-            arrival_id: "MTY",
+            departure_id: "ELP",
+            arrival_id: "ICN",
             outbound_date: "2026-07-10",
             return_date: "2026-07-15",
             currency: "MXN",
@@ -27,8 +28,19 @@ export default function FlightSearch({destCode}) {
           }
         }
       );
+      const data = response.data
 
-      setFlights(response.data.best_flights || []);
+      const flightArray= []
+      for (let i=0; i<data.length; i+=2){
+        flightArray.push({
+            departure: data[i],
+            return: data[i+1],
+            price: data[i].price
+        })
+      }
+
+      setFlights(flightArray);
+
     } catch (error) {
         console.log("this is errors", error.code)
         setError(error.message)
@@ -41,27 +53,59 @@ export default function FlightSearch({destCode}) {
 
   return (
     <div>
-      <h2>Search Flights</h2>
-      <p>el dest code es: {destCode}</p>
-      <button onClick={searchFlights}>Search</button>
+        <h2>Vuelos</h2>
+        
+        <button onClick={searchFlights}>Busqueda</button>
+        <br/>
+        {flights.map((flight, index) => (
+            <div key={index}>
+                <h3>Opcion {index + 1}</h3>
+                <p>Precio: {flight.price}</p>
+                <h4>Vuelo de ida</h4>
+                <p>Aerolinea: {flight.departure.airline_dep}</p>
+                <p>Aeropuerto de origen: {flight.departure.departureairport_dep}</p>
+                <p>Hora de la salida: {flight.departure.departuretime_dep}</p>
+                <p>Aeropuerto destino: {flight.departure.arrivalairport_dep}</p>
+                <p>Hora de llegada: {flight.departure.arrivaltime_dep}</p>
+                <p>Numero de escalas: {flight.departure.layoverqty_dep}</p>
+                <p>Escalas:</p>
+                {flight.departure.layovers_dep && flight.departure.layovers_dep.length > 0? (
+                    flight.departure.layovers_dep.map((layover, index)=> (
+                        <div key={index}>
+                            <p>Aeropuerto: {layover.name}</p>
+                            <p>Duracion: {layover.duration} minutos</p>
+                        </div>
+                    ))
+                ): (<p>Vuelo directo</p>)}
+                <p>Numero del vuelo: {flight.departure.flightnumber_dep}</p>
+                <p>Tipo de avion: {flight.departure.airplane_dep}</p>
+                <p>Duracion del vuelo: {flight.departure.totalduration_dep} minutos</p>
+                <br/>
 
-      {flights.map((flight, index) => (
-        <div key={index}>
-          <p>Aerolinea: {flight.flights[0].airline}</p>
-          <p>Aeropuerto de salida: {flight.flights[0].departure_airport.name}</p>
-          <p>Aeropuerto de llegada: {flight.flights[0].arrival_airport.name}</p>
-          <p>Cantidad de escalas: </p>
-          <p>Escala: </p>
-          <p>Hora de salida: {flight.flights[0].departure_airport.time}</p>
-          <p>Hora de llegada: {flight.flights[0].arrival_airport.time}</p>
-          <p>Tipo de avion: {flight.flights[0].airplane}</p>
-          <p>Numero de vuelo: {flight.flights[0].flight_number}</p>
-          <p>Precio: {flight.price}</p>
-          <p>Duracion del vuelo: {flight.total_duration}</p>
-          <br/>
-          
-        </div>
-      ))}
+                <h4>Vuelo de regreso</h4>
+                <p>Aerolinea: {flight.return.airline_ret}</p>
+                <p>Aeropuerto de origen: {flight.return.departureairport_ret}</p>
+                <p>Hora de la salida: {flight.return.departuretime_ret}</p>
+                <p>Aeropuerto destino: {flight.return.arrivalairport_ret}</p>
+                <p>Hora de llegada: {flight.return.arrivaltime_ret}</p>
+                <p>Numero de escalas: {flight.return.layoverqty_ret}</p>
+                <p>Escalas:</p>
+                {flight.return.layovers_ret && flight.return.layovers_ret.length > 0? (
+                    flight.return.layovers_ret.map((layover, index)=> (
+                        <div key={index}>
+                            <p>Aeropuerto: {layover.name}</p>
+                            <p>Duracion: {layover.duration} minutos</p>
+                        </div>
+                    ))
+                ): (<p>Vuelo directo</p>)}
+                <p>Numero del vuelo: {flight.return.flightnumber_ret}</p>
+                <p>Tipo de avion: {flight.return.airplane_ret}</p>
+                <p>Duracion del vuelo: {flight.return.totalduration_ret} minutos</p>
+                <br/>
+            </div>
+        ))}
+   
     </div>
+    
   );
 }
