@@ -49,7 +49,7 @@ export default function HotelSearch() {
           <p>Nombre: {hotel.name}</p>
           <p>Ubicacion: {hotel.gps_coordinates.latitude}, {hotel.gps_coordinates.longitude}</p>
           <p>Numero de estrellas: {hotel.hotel_class}</p>
-          <p>Rating: {hotel.overall_rating}/5</p>
+          <p>Calificacion: {hotel.overall_rating}/5</p>
           <p>Precio por noche: {hotel.price}</p>
           <br/>
         </div>
