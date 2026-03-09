@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function FlightSearch() {
+export default function FlightSearch({destCode}) {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(false);
   const[error, setError] = useState(null);
+  const destinationCode = {destCode}
 
   const searchFlights = async () => {
     setLoading(true);
@@ -16,7 +17,7 @@ export default function FlightSearch() {
           params: {
             engine: "google_flights",
             departure_id: "CUU",
-            arrival_id: "CUN",
+            arrival_id: "MTY",
             outbound_date: "2026-07-10",
             return_date: "2026-07-15",
             currency: "MXN",
@@ -41,15 +42,24 @@ export default function FlightSearch() {
   return (
     <div>
       <h2>Search Flights</h2>
+      <p>el dest code es: {destCode}</p>
       <button onClick={searchFlights}>Search</button>
-
-      {loading && <p>Loading...</p>}
 
       {flights.map((flight, index) => (
         <div key={index}>
-          <p>Price:{flight.price}</p>
-          <p>Total Duration: {flight.total_duration}</p>
-          <p>Airline: {flight.flights[0].airline}</p>
+          <p>Aerolinea: {flight.flights[0].airline}</p>
+          <p>Aeropuerto de salida: {flight.flights[0].departure_airport.name}</p>
+          <p>Aeropuerto de llegada: {flight.flights[0].arrival_airport.name}</p>
+          <p>Cantidad de escalas: </p>
+          <p>Escala: </p>
+          <p>Hora de salida: {flight.flights[0].departure_airport.time}</p>
+          <p>Hora de llegada: {flight.flights[0].arrival_airport.time}</p>
+          <p>Tipo de avion: {flight.flights[0].airplane}</p>
+          <p>Numero de vuelo: {flight.flights[0].flight_number}</p>
+          <p>Precio: {flight.price}</p>
+          <p>Duracion del vuelo: {flight.total_duration}</p>
+          <br/>
+          
         </div>
       ))}
     </div>
