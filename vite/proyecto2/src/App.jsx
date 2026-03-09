@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchData setDestCode={setDestCode}/>} />
           <Route path="/results" element={<FlightSearch destCode={destCode}/>}/>
+          <Route path="/hotels" element={<HotelSearch/>}/>
         </Routes>
       </BrowserRouter>
 

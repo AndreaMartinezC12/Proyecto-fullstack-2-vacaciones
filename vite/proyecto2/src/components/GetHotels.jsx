@@ -15,7 +15,7 @@ export default function HotelSearch() {
         {
           params: {
             engine: "google_hotels",
-            location: "monterrey",
+            location: "los angeles",
             check_in: "2026-07-10",
             check_out: "2026-07-15",
             people: "2",
@@ -40,15 +40,18 @@ export default function HotelSearch() {
 
   return (
     <div>
-      <h2>Search Hotels</h2>
-      <button onClick={searchHotels}>Search</button>
-
-      {loading && <p>Loading...</p>}
+      <h2>Resultados de hoteles</h2>
+      <button onClick={searchHotels}>Busqueda</button>
 
       {hotels.map((hotel, index) => (
         <div key={index}>
-          <p>Price:{hotel.price}</p>
-          <p>Name: {hotel.name}</p>
+          <img src={hotel.thumbnail} alt={hotel.name} />
+          <p>Nombre: {hotel.name}</p>
+          <p>Ubicacion: {hotel.gps_coordinates.latitude}, {hotel.gps_coordinates.longitude}</p>
+          <p>Numero de estrellas: {hotel.hotel_class}</p>
+          <p>Rating: {hotel.overall_rating}/5</p>
+          <p>Precio por noche: {hotel.price}</p>
+          <br/>
         </div>
       ))}
     </div>
