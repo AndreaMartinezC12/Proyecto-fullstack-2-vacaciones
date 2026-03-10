@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { data } from "react-router-dom";
 
-export default function FlightSearch({destCode}) {
+export default function FlightSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(false);
   const[error, setError] = useState(null);
-  const destinationCode = {destCode}
 
   const searchFlights = async () => {
     setLoading(true);
@@ -17,10 +16,10 @@ export default function FlightSearch({destCode}) {
         {
           params: {
             engine: "google_flights",
-            departure_id: "ELP",
-            arrival_id: "ICN",
-            outbound_date: "2026-07-10",
-            return_date: "2026-07-15",
+            departure_id: origCode,
+            arrival_id: destCode,
+            outbound_date: departDate,
+            return_date: returnDate,
             currency: "MXN",
             hl: "en",
             gl: "us",
@@ -54,6 +53,7 @@ export default function FlightSearch({destCode}) {
   return (
     <div>
         <h2>Vuelos</h2>
+        <h2>El valor que pase: {destination}</h2>
         
         <button onClick={searchFlights}>Busqueda</button>
         <br/>

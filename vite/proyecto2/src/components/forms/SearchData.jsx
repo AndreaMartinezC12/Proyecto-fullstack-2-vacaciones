@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // import InputDestCode from "../inputs/InputDestCode";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchData({setDestCode}){
+export default function SearchData({setDestCode, setOrigCode, setDepartDate, setReturnDate, setPeopleQty, setDestination}){
     const navigate = useNavigate()
     //const [destCode, setDestCode] = useState("")
 
