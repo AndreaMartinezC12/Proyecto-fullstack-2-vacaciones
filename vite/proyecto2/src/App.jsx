@@ -6,6 +6,7 @@ import HotelSearch from './components/GetHotels'
 import SearchData from './components/forms/SearchData'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
+import ResultSearch from './components/GetResults'
 
 
 function App() {
@@ -21,8 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SearchData setDestCode={setDestCode} setOrigCode={setOrigCode} setDepartDate={setDepartDate} setReturnDate={setReturnDate} setPeopleQty={setPeopleQty} setDestination={setDestination}/>} />
-          <Route path="/results" element={<FlightSearch destCode={destCode} origCode={origCode} departDate={departDate} returnDate={returnDate} peopleQty={peopleQty} destination={destination}/>}/>
-          <Route path="/hotels" element={<HotelSearch/>}/>
+          <Route path="/results" element={<ResultSearch destCode={destCode} origCode={origCode} departDate={departDate} returnDate={returnDate} peopleQty={peopleQty} destination={destination}/>}/>
         </Routes>
       </BrowserRouter>
 
