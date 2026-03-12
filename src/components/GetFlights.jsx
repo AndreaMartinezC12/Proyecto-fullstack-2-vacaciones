@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { data } from "react-router-dom";
 
-export default function ResultSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
+export default function FlightSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
   const [flights, setFlights] = useState([]);
   const [hotels, setHotels] = useState([])
   const [loading, setLoading] = useState(false);
   const[error, setError] = useState(null);
 
-  const searchResults = async () => {
+  const searchFlights = async () => {
     setLoading(true);
 
     try {
@@ -75,7 +75,7 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
         <h2>Vuelos</h2>
         <h2>El valor que pase: {destination}</h2>
         
-        <button onClick={searchResults}>Busqueda</button>
+        <button onClick={searchFlights}>Busqueda</button>
         <br/>
         {flights.map((flight, index) => (
             <div key={index}>

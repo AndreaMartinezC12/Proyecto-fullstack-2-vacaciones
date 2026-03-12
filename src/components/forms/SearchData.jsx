@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./SearchData.css"
 // import InputDepartDate from "../inputs/InputDepartDate";
 // import InputDestCode from "../inputs/InputDestCode";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +17,12 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
 
     return(
         <>
-        <form onSubmit={doSubmit}>
+        <form onSubmit={doSubmit} class="flight-form">
             <h1>Arma tus vacaciones</h1>
             <p>A donde quieres viajar?</p>
             <input
             type= "text"
             placeholder= "Nombre de tu destino"
-            className="bg-amber-900"
             onChange={(e) => setDestination(e.target.value)}
             />
 
@@ -30,7 +30,6 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
             <input
             type= "text"
             placeholder="Aeropuerto de origen"
-            className="bg-amber-900"
             onChange={(e) => setOrigCode(e.target.value)}
             />
 
@@ -38,7 +37,6 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
             <input
             type= "text"
             placeholder="Aeropuerto de destino"
-            className="bg-amber-900"
             onChange={(e) => setDestCode(e.target.value)}
             />
 
@@ -46,7 +44,6 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
             <input
             type= "date"
             placeholder="Fecha de salida"
-            className="bg-amber-900"
             onChange={(e) => setDepartDate(e.target.value)}
             />
 
@@ -54,7 +51,6 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
             <input
             type= "date"
             placeholder="Fecha de regreso"
-            className="bg-amber-900"
             onChange={(e) => setReturnDate(e.target.value)}
             />
 
@@ -62,14 +58,13 @@ export default function SearchData({setDestCode, setOrigCode, setDepartDate, set
             <input
             type= "number"
             placeholder="Numero de personas"
-            className="bg-amber-900"
             onChange={(e) => setPeopleQty(e.target.value)}
             />
 
 
 
             <p>Holiiiis</p>
-            <button type="submit">Search</button>
+            <button type="submit" class="search-button">Search</button>
 
         </form>
         </>
