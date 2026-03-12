@@ -1,10 +1,10 @@
 export default function Input({type, placeholder, onChange}){
     return(
-        <input
+        <input 
             type={type}
             placeholder={placeholder}
             onChange={onChange}
-            className="inout"
+            className="input"
         />
     )
 }

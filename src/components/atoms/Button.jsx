@@ -1,6 +1,7 @@
-export default function Button ({text, type}){
-
-    return <button type={type} className={"search-button"}>
-        {text}
-    </button>
+export default function Button({type, text}){
+    return(
+        <button type={type} className="search-button">
+            {text}
+        </button>
+    )
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./SearchData.css"
 // import InputDepartDate from "../inputs/InputDepartDate";
 // import InputDestCode from "../inputs/InputDestCode";
-import FormSection from "../Molecules/FormSection";
+import FormSection from "../molecules/FormSection";
 import Button from "../Atoms/Button";
 import { useNavigate } from "react-router-dom";
 

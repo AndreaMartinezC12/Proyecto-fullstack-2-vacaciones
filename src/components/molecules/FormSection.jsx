@@ -1,6 +1,6 @@
 import Input from "../Atoms/Input";
 
-export default function FormSection({type, label, placeholder, onChange}){
+export default function FormSection({label, type, placeholder, onChange}){
     return(
         <div className="form-section">
             <p>{label}</p>
@@ -11,4 +11,5 @@ export default function FormSection({type, label, placeholder, onChange}){
             />
         </div>
     )
+    
 }
