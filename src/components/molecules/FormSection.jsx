@@ -1,4 +1,4 @@
-import Input from "../Atoms/Input";
+import Input from "../atoms/Input";
 
 export default function FormSection({label, type, placeholder, onChange}){
     return(
