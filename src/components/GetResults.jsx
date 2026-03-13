@@ -9,7 +9,7 @@ import HotelList from "./organisms/HotelList";
 export default function ResultSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
   const [flights, setFlights] = useState([]);
   const [hotels, setHotels] = useState([])
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const[error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("flights")
 
@@ -72,10 +72,19 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
     } catch (error) {
         console.log("this is errors", error.code)
         setError(error.message)
+        setLoading(false)
+    }finally{
+      setLoading(false)
     }
-
-    setLoading(false);
   };
+
+  if(loading) 
+      return(
+          <div className="loading-container">
+              <div className="spinner"></div>
+              <p>Buscando...</p>
+          </div>
+      ) 
 
   if (error) return <p>{error}</p>
 
@@ -83,7 +92,7 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
     <div className="results-container">
       <div className="results-header">
         <img
-            src="https://staffordshireliving.co.uk/wp-content/uploads/2024/06/anse-source-d-argent-beach-la-digue-island-seysh-2023-12-19-03-33-50-utc-scaled.jpg"
+            src="https://static0.simpleflyingimages.com/wordpress/wp-content/uploads/2023/06/shutterstock_2056218710-2.jpg"
             alt="Destino"
             className="results-image"
         />       
