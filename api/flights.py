@@ -4,10 +4,10 @@ from . import vuelos
 
 def handler(request):
     
-    origin = request.query.get("departure_id")
-    destination = request.query.get("arrival_id")
-    departure_date = request.query.get("outbound_date")
-    return_date = request.query.get("return_date")
+    origin = request.args.get("departure_id")
+    destination = request.args.get("arrival_id")
+    departure_date = request.args.get("outbound_date")
+    return_date = request.args.get("return_date")
 
     params = {
         "engine": "google_flights",
