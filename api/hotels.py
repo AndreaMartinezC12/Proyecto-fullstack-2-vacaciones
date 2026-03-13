@@ -2,7 +2,7 @@ import json
 import requests
 from urllib.parse import parse_qs, urlparse
 
-def handler(request):
+def handler(request, context):
     location = request.args.get("location")
     check_in = request.args.get("check_in")
     check_out = request.args.get("check_out")
