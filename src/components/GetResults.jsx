@@ -5,6 +5,7 @@ import { data } from "react-router-dom";
 import FlightList from "./organisms/FlightList";
 import HotelList from "./organisms/HotelList";
 
+
 export default function ResultSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
   const [flights, setFlights] = useState([]);
   const [hotels, setHotels] = useState([])
@@ -47,7 +48,7 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
         })
       }
 
-      setFlights(flightArray);
+      setFlights(flightArray);  
 
       const responseHotels = await axios.get(
         "http://localhost:5000/api/hotels",
@@ -79,11 +80,16 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
   if (error) return <p>{error}</p>
 
   return (
-    <div>
+    <div className="results-container">
       <h2>Resultados de la busqueda</h2>
-        <div>
-            <button onClick={() => setActiveTab("flights")}>Vuelos</button>
-            <button onClick={() => setActiveTab("hotels")}>Hoteles</button>
+        <div className="tabs">
+            <button 
+            className={activeTab == "flights" ? "tab active" : "tab"}
+            onClick={() => setActiveTab("flights")}>Vuelos</button>
+
+            <button 
+            className={activeTab == "hotels" ? "tab active" : "tab"}
+            onClick={() => setActiveTab("hotels")}>Hoteles</button>
         </div>
 
         {activeTab == "flights" && (
