@@ -1,9 +1,9 @@
 import json
 import requests
-import vuelos
+from . import vuelos
 
 def handler(request, context):
-
+    
     origin = request.query.get("departure_id")
     destination = request.query.get("arrival_id")
     departure_date = request.query.get("outbound_date")
@@ -22,6 +22,7 @@ def handler(request, context):
 
     resultados = vuelos.searchflights(params)
 
+    # dsfd
     return {
         "statusCode": 200,
         "headers": {"Content-Type": "application/json"},
