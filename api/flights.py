@@ -2,7 +2,7 @@ import json
 import requests
 from . import vuelos
 
-def handler(request, context):
+def handler(request):
     
     origin = request.query.get("departure_id")
     destination = request.query.get("arrival_id")
