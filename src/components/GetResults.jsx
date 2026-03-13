@@ -81,25 +81,35 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
 
   return (
     <div className="results-container">
-      <h2>Resultados de la busqueda</h2>
-        <div className="tabs">
-            <button 
-            className={activeTab == "flights" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("flights")}>Vuelos</button>
+      <div className="results-header">
+        <img
+            src="https://staffordshireliving.co.uk/wp-content/uploads/2024/06/anse-source-d-argent-beach-la-digue-island-seysh-2023-12-19-03-33-50-utc-scaled.jpg"
+            alt="Destino"
+            className="results-image"
+        />       
+      </div>
 
-            <button 
-            className={activeTab == "hotels" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("hotels")}>Hoteles</button>
-        </div>
+      <div className="results-title">
+        <h1>Viajando a: {destination}</h1>
+        <p>Resultados de la busqueda</p>
+      </div>
 
-        {activeTab == "flights" && (
-          <FlightList flights={flights}/>
-                
-        )}
-        
-        {activeTab == "hotels" && (
-          <HotelList hotels={hotels}/>
-        )}
+      <div className="tabs">
+          <button 
+          className={activeTab == "flights" ? "tab active" : "tab"}
+          onClick={() => setActiveTab("flights")}>Vuelos</button>
+          <button 
+          className={activeTab == "hotels" ? "tab active" : "tab"}
+          onClick={() => setActiveTab("hotels")}>Hoteles</button>
+      </div>
+      {activeTab == "flights" && (
+        <FlightList flights={flights}/>
+              
+      )}
+      
+      {activeTab == "hotels" && (
+        <HotelList hotels={hotels}/>
+      )}
     </div>
     
   );
