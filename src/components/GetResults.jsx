@@ -22,7 +22,8 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
 
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/flights",
+        "/api/flights",
+        // "http://localhost:5000/api/flights",
         {
           params: {
             engine: "google_flights",
@@ -51,7 +52,8 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
       setFlights(flightArray);  
 
       const responseHotels = await axios.get(
-        "http://localhost:5000/api/hotels",
+        "/api/hotels",
+        // "http://localhost:5000/api/hotels",
         {
           params: {
             engine: "google_hotels",
