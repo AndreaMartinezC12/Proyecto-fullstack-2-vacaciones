@@ -25,3 +25,6 @@ dist-ssr
 
 .\src\components\GetFlights2.jsx
 
+
+.vercel
+.env*.local
