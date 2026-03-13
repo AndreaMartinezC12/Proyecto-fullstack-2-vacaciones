@@ -4,14 +4,12 @@ from urllib.parse import parse_qs, urlparse
 import vuelos
 
 def handler(request):
-    query = parse_qs(urlparse(request.path).query)
+    origin = request.args.get("departure_id")
+    destination = request.args.get("arrival_id")
+    departure_date = request.args.get("outbound_date")
+    return_date = request.args.get("return_date")
 
-    origin = query.get("departure_id", [""])[0]
-    destination = query.get("arrival_id", [""])[0]
-    departure_date = query.get("outbound_date", [""])[0]
-    return_date = query.get("return_date", [""])[0]
-
-    params ={
+    params = {
         "engine": "google_flights",
         "departure_id": origin,
         "arrival_id": destination,
@@ -19,7 +17,7 @@ def handler(request):
         "return_date": return_date,
         "currency": "MXN",
         "hl": "en",
-        "api_key": "9d7d027cff59c9d81a06238f00abeb0574471f5da88e2ad8b7b5021c7002d8af"
+        "api_key": "YOUR_API_KEY"
     }
 
     resultados = vuelos.searchflights(params)

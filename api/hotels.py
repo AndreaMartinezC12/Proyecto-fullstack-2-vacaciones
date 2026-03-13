@@ -3,12 +3,10 @@ import requests
 from urllib.parse import parse_qs, urlparse
 
 def handler(request):
-    query = parse_qs(urlparse(request.path).query)
-
-    location = query.get("location", [""])[0]
-    check_in = query.get("check_in", [""])[0]
-    check_out = query.get("check_out", [""])[0]
-    qty_people = query.get("people", [""])[0]
+    location = request.args.get("location")
+    check_in = request.args.get("check_in")
+    check_out = request.args.get("check_out")
+    qty_people = request.args.get("people")
 
     params ={
         "engine": "google_hotels",
