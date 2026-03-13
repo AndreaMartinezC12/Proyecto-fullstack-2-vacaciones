@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { data } from "react-router-dom";
+import FlightList from "./organisms/FlightList";
+import HotelList from "./organisms/HotelList";
 
 export default function ResultSearch({destCode, origCode, departDate, returnDate, peopleQty, destination}) {
   const [flights, setFlights] = useState([]);
@@ -78,83 +80,19 @@ export default function ResultSearch({destCode, origCode, departDate, returnDate
 
   return (
     <div>
-        {/* <button onClick={searchResults}>Busqueda</button> */}
+      <h2>Resultados de la busqueda</h2>
         <div>
             <button onClick={() => setActiveTab("flights")}>Vuelos</button>
             <button onClick={() => setActiveTab("hotels")}>Hoteles</button>
         </div>
 
         {activeTab == "flights" && (
-            <div>
-                <h2>Vuelos</h2>
-                <h2>Viaje para: {destination}</h2>
-
-                <br/>
-                {flights.map((flight, index) => (
-                    <div key={index}>
-                        <h3>Opcion {index + 1}</h3>
-                        <p>Precio: {flight.price}</p>
-                        <h4>Vuelo de ida</h4>
-                        <p>Aerolinea: {flight.departure.airline_dep}</p>
-                        <p>Aeropuerto de origen: {flight.departure.departureairport_dep}</p>
-                        <p>Hora de la salida: {flight.departure.departuretime_dep}</p>
-                        <p>Aeropuerto destino: {flight.departure.arrivalairport_dep}</p>
-                        <p>Hora de llegada: {flight.departure.arrivaltime_dep}</p>
-                        <p>Numero de escalas: {flight.departure.layoverqty_dep}</p>
-                        <p>Escalas:</p>
-                        {flight.departure.layovers_dep && flight.departure.layovers_dep.length > 0? (
-                            flight.departure.layovers_dep.map((layover, index)=> (
-                                <div key={index}>
-                                    <p>Aeropuerto: {layover.name}</p>
-                                    <p>Duracion: {layover.duration} minutos</p>
-                                </div>
-                            ))
-                        ): (<p>Vuelo directo</p>)}
-                        <p>Numero del vuelo: {flight.departure.flightnumber_dep}</p>
-                        <p>Tipo de avion: {flight.departure.airplane_dep}</p>
-                        <p>Duracion del vuelo: {flight.departure.totalduration_dep} minutos</p>
-                        <br/>
-                    
-                        <h4>Vuelo de regreso</h4>
-                        <p>Aerolinea: {flight.return.airline_ret}</p>
-                        <p>Aeropuerto de origen: {flight.return.departureairport_ret}</p>
-                        <p>Hora de la salida: {flight.return.departuretime_ret}</p>
-                        <p>Aeropuerto destino: {flight.return.arrivalairport_ret}</p>
-                        <p>Hora de llegada: {flight.return.arrivaltime_ret}</p>
-                        <p>Numero de escalas: {flight.return.layoverqty_ret}</p>
-                        <p>Escalas:</p>
-                        {flight.return.layovers_ret && flight.return.layovers_ret.length > 0? (
-                            flight.return.layovers_ret.map((layover, index)=> (
-                                <div key={index}>
-                                    <p>Aeropuerto: {layover.name}</p>
-                                    <p>Duracion: {layover.duration} minutos</p>
-                                </div>
-                            ))
-                        ): (<p>Vuelo directo</p>)}
-                        <p>Numero del vuelo: {flight.return.flightnumber_ret}</p>
-                        <p>Tipo de avion: {flight.return.airplane_ret}</p>
-                        <p>Duracion del vuelo: {flight.return.totalduration_ret} minutos</p>
-                        <br/>
-                    </div>
-                ))}
-            </div>
+          <FlightList flights={flights}/>
+                
         )}
         
         {activeTab == "hotels" && (
-            <div>
-                <h2>Resultados de hoteles</h2>
-                    {hotels.map((hotel, index) => (
-                      <div key={index}>
-                        <img src={hotel.thumbnail} alt={hotel.name} />
-                        <p>Nombre: {hotel.name}</p>
-                        <p>Ubicacion: {hotel.gps_coordinates.latitude}, {hotel.gps_coordinates.longitude}</p>
-                        <p>Numero de estrellas: {hotel.hotel_class}</p>
-                        <p>Calificacion: {hotel.overall_rating}/5</p>
-                        <p>Precio por noche: {hotel.price}</p>
-                        <br/>
-                      </div>
-                    ))}
-            </div>
+          <HotelList hotels={hotels}/>
         )}
     </div>
     
